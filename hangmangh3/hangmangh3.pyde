@@ -9,6 +9,9 @@ def setup():
     dict = open('C:\Users\Mark\Downloads\processing-3.5.4\processing-3.5.4\words.txt', 'r')
     words = dict.readlines()
     dict.close()
+    index = int(random(len(words) - 1))
+    randomWord = words[index]
+    word = randomWord[:-1]    
 
 
 
@@ -85,6 +88,8 @@ def gameScreen():
     line(100, 380, 100, 100)
     line(100, 100, 200, 100)
     line(200, 100, 200, 140)
+    
+    text(word, 500, 300)
 
 
 def keyPressed():
