@@ -1,11 +1,25 @@
 displayScreen = 0
 timer = 0
-
+wordComplete = False
+words = []
+word = []
+wrongGuess = []
+rightGuess = ['_' for x in range(len(word))] 
+gameOver = False
 
 def setup():
     global words, randomWord, word, wrongGuess, rightGuess, gameOver
     size(1000, 600)
     textAlign(CENTER)
+    dict = open('C:\Users\Mark\Downloads\processing-3.5.4\processing-3.5.4\words.txt', 'r')
+    words = dict.readlines()
+    dict.close()
+    index = int(random(len(words) - 1))
+    randomWord = words[index]
+    word = randomWord[:-1]
+    wrongGuess = []
+    rightGuess = ['_' for x in range(len(word))]
+    gameOver = False
 
 
 def draw():
@@ -81,9 +95,41 @@ def gameScreen():
     line(100, 380, 100, 100)
     line(100, 100, 200, 100)
     line(200, 100, 200, 140)
+    
+
+    #Show letters and blanks
+    fill(255)
+    right = ''
+    win = True
+    for x in rightGuess:
+        if x == '_':
+            win = False
+        right += x.upper() + ' '
+    wrong = ''
+    for x in wrongGuess:
+        wrong += x.upper() + ' '
+    textSize(65)
+    textAlign(CENTER)
+    text(right, 625, 300)
+    textSize(70)
+    text(wrong, 500, 500)
+
+
+        
+def guess(letter):
+    global words, randomWord, word, wrongGuess, rightGuess, gameOver
+    if len(str(letter)) == 1 and letter not in wrongGuess:
+        if letter in word:
+            for i, l in enumerate(word):
+                if l == letter:
+                    rightGuess[i] = str(letter)
+        else:
+            wrongGuess.append(str(letter))
 
 
 def keyPressed():
-    global displayScreen
+    global words, randomWord, word, wrongGuess, rightGuess, gameOver, displayScreen
     if displayScreen == 0 and keyCode == 32:
         displayScreen = 1
+    if (keyCode >= 65 and keyCode <= 90) or (keyCode >= 67 and keyCode <= 122):
+        guess(key)
