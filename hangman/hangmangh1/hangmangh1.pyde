@@ -8,7 +8,6 @@ def setup():
     textAlign(CENTER)
 
 
-
 def draw():
     background(0)    
     if displayScreen == 0:
@@ -82,3 +81,9 @@ def gameScreen():
     line(100, 380, 100, 100)
     line(100, 100, 200, 100)
     line(200, 100, 200, 140)
+
+
+def keyPressed():
+    global displayScreen
+    if displayScreen == 0 and keyCode == 32:
+        displayScreen = 1
