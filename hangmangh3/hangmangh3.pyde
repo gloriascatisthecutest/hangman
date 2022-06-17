@@ -113,7 +113,10 @@ def gameScreen():
     text(right, 625, 300)
     textSize(70)
     text(wrong, 500, 500)
-
+    
+    #Play again indicator
+    if win:
+        gameOver = True
 
         
 def guess(letter):
@@ -131,5 +134,6 @@ def keyPressed():
     global words, randomWord, word, wrongGuess, rightGuess, gameOver, displayScreen
     if displayScreen == 0 and keyCode == 32:
         displayScreen = 1
-    if (keyCode >= 65 and keyCode <= 90) or (keyCode >= 67 and keyCode <= 122):
-        guess(key)
+    if not gameOver:    
+        if (keyCode >= 65 and keyCode <= 90) or (keyCode >= 67 and keyCode <= 122):
+            guess(key)   
