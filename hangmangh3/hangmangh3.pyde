@@ -1,3 +1,8 @@
+#Name: Hangman
+#Programmer: Gloria Wang and Mark Chen
+#Date: June 5, 2022
+#Description: This game allows a player to play hangman using words in a text file
+
 displayScreen = 0
 timer = 0
 wordComplete = False
@@ -95,6 +100,32 @@ def gameScreen():
     line(100, 380, 100, 100)
     line(100, 100, 200, 100)
     line(200, 100, 200, 140)
+
+    #Draw guy
+    fill(0)
+    if len(wrongGuess) > 0:
+        ellipse(200, 170, 60, 60) #head
+    if len(wrongGuess) > 1:
+        line(200, 200, 200, 280) #body
+    if len(wrongGuess) > 2:
+        line(200, 240, 160, 200)#left arm
+    if len(wrongGuess) > 3:
+        line(200, 240, 240, 200) #right arm
+    if len(wrongGuess) > 4:
+        line(200, 280, 160, 330)#left leg
+    if len(wrongGuess) > 5:
+        line(200, 280, 240, 330) #right leg
+    if len(wrongGuess) > 6:
+        strokeWeight(6)
+        fill(255)
+        line(185, 158, 192, 165)
+        line(192, 158, 185, 165)
+        line(208, 158, 215, 165)
+        line(215, 158, 208, 165)
+        textSize(34)
+        text("You Lose! Word was " + str(word).upper(), 500, 100)
+        text("Press SPACE to play again", 500, 140)
+        gameOver = True
     
 
     #Show letters and blanks
@@ -117,6 +148,8 @@ def gameScreen():
     #Play again indicator
     if win:
         gameOver = True
+        textSize(34)
+        text("You win! Press SPACE to restart", 500, 100)
 
         
 def guess(letter):
@@ -136,4 +169,4 @@ def keyPressed():
         displayScreen = 1
     if not gameOver:    
         if (keyCode >= 65 and keyCode <= 90) or (keyCode >= 67 and keyCode <= 122):
-            guess(key)   
+            guess(key)  
