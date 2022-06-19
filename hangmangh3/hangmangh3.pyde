@@ -169,4 +169,12 @@ def keyPressed():
         displayScreen = 1
     if not gameOver:    
         if (keyCode >= 65 and keyCode <= 90) or (keyCode >= 67 and keyCode <= 122):
-            guess(key)  
+            guess(key)
+    elif gameOver and keyCode == 32:
+        index = int(random(len(words) - 1))
+        randomWord = words[index]
+        word = randomWord[:-1]
+        wrongGuess = []
+        rightGuess = ['_' for x in range(len(word))]
+        gameOver = False    
+     
